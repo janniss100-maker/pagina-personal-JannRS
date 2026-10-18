@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Web - Criptografía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta de colores Coquette / Pastel Green */
+        :root {
+            --bg-page: #dcedce;
+            --bg-window: #fbf9f1;
+            --border-dark: #6e8e64;
+            --header-green: #a7cca1;
+            --accent-red: #d16d6a;
+            --text-main: #4a5c46;
+            --card-yellow: #fdf5d3;
+            
+            /* Colores para la Biografía Vintage */
+            --bio-bg: #f4ebd9;
+            --bio-text: #3c2a1e;
+            --bio-header: #e6d8c0;
+            --bio-border: #bdae93;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            background-image: radial-gradient(#b8d8b3 2px, transparent 2px);
+            background-size: 30px 30px;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            margin: 0;
+        }
+
+        .window-container {
+            background-color: var(--bg-window);
+            border: 4px solid var(--border-dark);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 950px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .browser-bar {
+            background-color: var(--header-green);
+            border-bottom: 4px solid var(--border-dark);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--border-dark);
+        }
+        .dot.red { background-color: #e07a7a; }
+        .dot.yellow { background-color: #f2d974; }
+        .dot.green { background-color: #85b08b; }
+
+        .url-bar {
+            background-color: white;
+            border: 2px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--border-dark);
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        .banner {
+            background-color: var(--header-green);
+            padding: 30px;
+            border-bottom: 4px dotted var(--border-dark);
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--border-dark);
+        }
+
+        .banner p { font-size: 1.2rem; font-weight: 600; margin: 5px 0 0 0; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background-color: var(--card-yellow);
+            border: 3px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .card.downloads { background-color: white; }
+        
+        .card h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--accent-red);
+            margin-top: 0;
+            border-bottom: 2px dashed var(--accent-red);
+            padding-bottom: 5px;
+        }
+
+        .profile-container {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
+        }
+
+        .profile-pic {
+            width: 90px; height: 90px; border-radius: 50%;
+            border: 3px solid var(--border-dark); object-fit: cover;
+        }
+
+        ul { list-style-type: none; padding: 0; }
+        ul li { margin-bottom: 10px; font-weight: 600; }
+        a { color: var(--border-dark); text-decoration: none; font-weight: bold; }
+
+        .btn {
+            display: inline-block; background-color: var(--bg-window);
+            border: 2px solid var(--border-dark); border-radius: 12px;
+            padding: 8px 15px; margin: 5px 5px 5px 0; font-size: 0.9rem; cursor: pointer;
+        }
+        .btn:hover { background-color: var(--header-green); }
+
+        .btn-download {
+            background-color: var(--accent-red); color: white; border-color: #a84845; width: 85%; text-align: center; margin-bottom: 10px;
+        }
+        .btn-download:hover { background-color: #a84845; color: white; }
+
+        .hobbies-gallery { display: flex; gap: 10px; margin-top: 15px; }
+        .hobbies-gallery img { width: 30%; border-radius: 10px; border: 2px solid var(--border-dark); aspect-ratio: 1; object-fit: cover; }
+
+        .bio-vintage {
+            grid-column: 1 / -1;
+            background-color: var(--bio-bg);
+            border: 2px solid var(--bio-border);
+            padding: 40px;
+            font-family: 'Playfair Display', serif; 
+            color: var(--bio-text);
+            box-shadow: inset 0 0 50px rgba(139, 115, 85, 0.1);
+            border-radius: 4px; 
+        }
+
+        .bio-main-title {
+            text-align: center;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            margin: 0 0 30px 0;
+            border-bottom: none;
+            color: var(--bio-text);
+            text-transform: uppercase;
+        }
+
+        .bio-top-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .bio-portrait {
+            width: 100%;
+            border: 8px solid #e1d3c0;
+            outline: 2px solid var(--bio-border);
+            background-color: #fff;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .bio-header-box {
+            background-color: var(--bio-header);
+            padding: 10px 20px;
+            border-top: 2px solid var(--bio-border);
+            border-bottom: 2px solid var(--bio-border);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .bio-list {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-left: 20px;
+            list-style-type: disc;
+        }
+
+        .bio-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .bio-text-block h3 {
+            background-color: var(--bio-header);
+            padding: 8px 15px;
+            border-top: 2px solid var(--bio-border);
+            border-bottom: 2px solid var(--bio-border);
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+
+        .bio-text-block p {
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .bio-image-secondary {
+            width: 100%;
+            border: 5px solid #d4c5b0;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .bio-top-section, .bio-columns { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="window-container">
+        <!-- Barra superior tipo navegador -->
+        <div class="browser-bar">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div class="url-bar">cripto.jannet.dev ✨</div>
+        </div>
+
+        <!-- Pantalla de presentación principal -->
+        <div class="banner">
+            <h1>Tania Jannet Reyes Santamaria</h1>
+            <p>¡Bienvenid@ a mi página web personal</p>
+        </div>
+
+        <div class="content-grid">
+            
+            <!-- Tarjeta 1: Info Personal -->
+            <div class="card">
+                <h2>Información Personal</h2>
+                <div class="profile-container">
+                    <img src="assets/foto.jpeg" alt="Foto de Jannet" class="profile-pic">
+                    <div>
+                        <ul>
+                            <li><b>Formación Académica:</b><br> Ingeniería en Sistemas Computacionales ESCOM (IPN)</li>
+                            <li><b>Correo:</b><br> <a href="mailto:janniss100@gmail.com">janniss100@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p><b>Mis Redes Sociales:</b></p>
+                <a href="https://discordapp.com/users/1558571993836691536" class="btn">Discord</a>
+                <a href="https://github.com/janniss100-maker" class="btn">GitHub</a>
+                <a href="https://www.linkedin.com/in/jannet-reyes-0917263b8" class="btn">LinkedIn</a>
+            </div>
+
+            <!-- Tarjeta 2: Mis Descargas -->
+            <div class="card downloads">
+                <h2>Mis Descargas</h2>
+                <p>Aquí puedes obtener mi información académica y mis llaves de seguridad:</p>
+                <br>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <a href="assets/Currículum Vitae - Tania Jannet Reyes Santamaria.pdf" class="btn btn-download" download>📄 Descargar CV</a>
+                    <a href="#" class="btn btn-download">🔑 Mi llave Pública</a>
+                </div>
+            </div>
+
+            <!-- SECCIÓN VINTAGE: Biografía de Alan Turing -->
+            <div class="bio-vintage">
+                <h1 class="bio-main-title">Biografía</h1>
+                
+                <div class="bio-top-section">
+                    <div>
+                        <!-- FOTO DE TURING: Guarda una foto de él en tu carpeta assets -->
+                        <img src="assets/turing.jpg" alt="Alan Turing" class="bio-portrait">
+                    </div>
+                    <div>
+                        <div class="bio-header-box">Alan Mathison Turing:</div>
+                        <ul class="bio-list">
+                            <li><b>Fecha de Nacimiento:</b> 23 de junio de 1912</li>
+                            <li><b>Profesión:</b> Matemático, lógico, informático y criptoanalista</li>
+                            <li><b>Nacionalidad:</b> Británica</li>
+                            <li><b>Aportaciones Clave:</b> Máquina de Turing, Descifrado de Enigma</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bio-columns">
+                    <!-- Columna Izquierda -->
+                    <div>
+                        <div class="bio-text-block">
+                            <h3>Aportaciones a la Criptografía:</h3>
+                            <p>Durante la Segunda Guerra Mundial, Turing trabajó en Bletchley Park, el centro de descifrado de códigos de Gran Bretaña. Fue el principal responsable de descifrar la máquina Enigma, utilizada por la marina alemana para cifrar sus comunicaciones.</p>
+                            <p>Turing diseñó la "bombe", una máquina electromecánica que automatizaba el proceso de descifrado, logrando interceptar mensajes cruciales que cambiaron el rumbo del conflicto bélico.</p>
+                        </div>
+                        
+                        <div class="bio-text-block" style="margin-top: 30px;">
+                            <h3>Curiosidades:</h3>
+                            <p>Era un corredor de larga distancia de nivel casi olímpico. Trágicamente, en 1952 fue procesado por su homosexualidad y sometido a castración química. Falleció en 1954 tras morder una manzana con cianuro. Fue indultado póstumamente por la reina Isabel II en el año 2013.</p>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha -->
+                    <div>
+                        <div class="bio-text-block">
+                            <h3>Su Legado Histórico:</h3>
+                            <p>Es universalmente considerado como uno de los padres fundadores de la ciencia de la computación teórica y la inteligencia artificial. Su conceptualización de la "Máquina de Turing" sentó las bases lógicas de lo que hoy conocemos como el algoritmo y las computadoras modernas.</p>
+                        </div>
+                        <!-- FOTO MÁQUINA ENIGMA: Guarda una foto de la máquina en tu carpeta assets -->
+                        <img src="assets/enigma.jpg" alt="Máquina Enigma" class="bio-image-secondary">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Hobbies -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h2>Mis Hobbies 🎨</h2>
+                <p>Un poquito de lo que me gusta hacer en mi tiempo libre:</p>
+                <div class="hobbies-gallery">
+                    <img src="assets/hobbie1.jpg" alt="Hobbie 1">
+                    <img src="assets/hobbie2.jpg" alt="Hobbie 2">
+                    <img src="assets/hobbie3.jpg" alt="Hobbie 3">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
